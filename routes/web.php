@@ -54,7 +54,8 @@ Route::get('/teacher/courses/view', [App\Http\Controllers\TeacherController::cla
 Route::get('/teacher/courses/teach', [App\Http\Controllers\TeacherController::class, 'teach_course_details'])->name("teacher");
 Route::post('/admin/courses/teach/discussion', [App\Http\Controllers\DiscussionForumController::class, 'create_discusssion_topic'])->name('teacher');
 Route::post('/courses/teach/discussion/comments', [App\Http\Controllers\DiscussionCommentsController::class, 'create_discusssion_comment'])->name("teacher");
-Route::post('/teacher/courses/course_materials', [App\Http\Controllers\TeacherController::class, 'course_materials'])->name('teacher');
+Route::post('/teacher/courses/course_materials', [App\Http\Controllers\AdditionalCourseMaterialsController::class, 'create_course_materials'])->name('teacher');
+Route::post('/teacher/courses/create_assessement', [App\Http\Controllers\AssessmentBookController::class, 'create_assessement'])->name('teacher');
 
 //Setting up the routes for student
 Route::get('/student', [App\Http\Controllers\StudentController::class, 'index'])->name('student');         

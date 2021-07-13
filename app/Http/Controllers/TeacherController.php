@@ -271,37 +271,7 @@ class TeacherController extends Controller
             dd("Erroe while fetching the database...!!!");
         }
     }
-    public function course_materials(Request $request){
-        try {
-            //code...            
-            //$universalClass = new UniversalClass();
-            if (Auth::user()->id > 0 && (Auth::user()->account_type == "teacher")) 
-            {
-                # get the values of the sent data
-                $this->validate($request, [
-                    'files_data' => 'required',
-                    'files_data.*' => 'mimes:doc,pdf,docx,zip,ppt,pptx'
-                ]);
-                $description = $request->input("description");
-                $course_id = (int) $request->input("setting_course_id");
-                $topic_id = (int) $request->input("setting_week_id");
-                //Split links by semicolon                
-                $additional_links = UniversalClass::splitLinks($request->input("additional_links"));
-                //Get the course name 
-                $course_name = Course::where("id", $course_id)->pluck("course_name")[0];
-                //dd($course_name);
-                //Separate the files and save data into the database
-                $uploaded_files_info = UniversalClass::separateMultipleUploadFiles($request, "files_data", "videos/courses/". $course_name);
-                // Save the information to the database
-                dd([$additional_links, $uploaded_files_info]);
-            }
-            
-        } catch (\Throwable $th) {
-            //throw $th;
-            dd($th->getMessage());
-           // return redirect('/teacher');
-        }
-    }
+    
     //Get the name of the teacher
     
 }

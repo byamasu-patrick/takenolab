@@ -169,51 +169,92 @@
                             </div>  
                     </div>
             </div>         
-            <div class="col-lg-8" id="secondary" style="display: none;">
-                <div class="row">
-                    <div class="col-7">
-                        <p style="font-weight: bold;">Create Week Objectives and Activities </p>
+            <div class="col-lg-8" id="secondary" style="display: none;">                
+                <div class="materials">
+                    <div class="row">
+                        <div class="col-7">
+                            <p style="font-weight: bold;">Create Week Objectives and Activities </p>
+                        </div>
+                        <div class="col-5" style="margin-top: 13px;">     
+                            <button class="btn" style="color: rgb(109, 130, 74);" id="assignment">Load Assignement</button>               
+                            <button class="btn btn-light" id="go_to_main" style="color: rgb(109, 130, 74); ">Go to main</button>
+                        </div>
+                    </div>                   
+                    <hr style="height: 8px;">        
+                    <div class="row border" style="padding: 10px;">
+                        <div class="col-12">
+                            <form method="POST" action="/teacher/courses/course_materials" enctype="multipart/form-data" style="margin-left: 5%; width: 80%;">
+                                @csrf                                                    
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" id="setting_course_id" name="setting_course_id" value="{{ app('request')->input('course_id') }}">                                                        
+                                    <input type="hidden" class="form-control" id="setting_week_id" name="setting_week_id" value="">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <small>One of the very important thing in teaching is to set up the objectives of the week so that student should understand what they expect to be able to after completing this particular week,
+                                    In the form bellow set up the objectives of the week and some activities that student are expected to do.</small><br>
+                                    <label for="description" style="margin-top: 10px;">Week Description and Activities</label>
+                                    <textarea class="form-control" name="description" id="description" rows="4" placeholder="Write down the week objectives and descriptions and what student are expecting to get after the completion of this particular lesson."></textarea>
+                                </div><hr>
+                                <div class="form-group">
+                                    <small>You can also share lecture files (in PDF), PowerPoint presentation and notes to students.
+                                    </small><br>
+                                    <label for="files_data" style="margin-top: 10px;">Click on the form below to upload materials</label>
+                                    <input type="file" class="form-control" name="files_data[]" id="files_data" multiple>
+                                </div><hr>
+                                <div class="form-group">
+                                    <small>You can also add youtube videos links for additional resourses on some topics that seems to be complicated, and/or that need more attention to students. <br>
+                                    <span class="text-warning" style="font-weight: bold;">Please separate the links by a semicolon </span> </small><br>
+                                    <label for="additional_links" style="margin-top: 10px;">Add youtube video links</label>
+                                    <input type="text" class="form-control" name="additional_links" id="additional_links" placeholder="Youtube links">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success" style="width: 20%; float: right; background: rgb(109, 130, 74); border: none;"> Save Lesson</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="col-5" style="margin-top: 13px;">     
-                        <button class="btn" style="color: rgb(109, 130, 74);" id="assignment">Load Assignement</button>               
-                        <button class="btn btn-light" id="go_to_main" style="color: rgb(109, 130, 74); ">Go to main</button>
+                </div>
+                <div class="assignment" style="display: none;">
+                    <div class="row">
+                        <div class="col-7">
+                            <p style="font-weight: bold;">Create or Modify Assessmemt Questions</p>
+                        </div>
+                        <div class="col-5" style="margin-top: 13px;">     
+                            <button class="btn" style="color: rgb(109, 130, 74);" id="material_cont">Video Lectures</button> 
+                        </div>
                     </div>
-                </div>                   
-                <hr style="height: 8px;">        
-                <div class="row">
-                    <div class="col-12">
-                        <form method="POST" action="/teacher/courses/course_materials" enctype="multipart/form-data" style="margin-left: 5%; width: 80%;">
-                                                    @csrf
-                                                    
-                                                    <div class="form-group">
-                                                        <input type="hidden" class="form-control" id="setting_course_id" name="setting_course_id" value="{{ app('request')->input('course_id') }}">                                                        
-                                                        <input type="hidden" class="form-control" id="setting_week_id" name="setting_week_id" value="">
-                                                    </div>
-                                                   
-                                                    <div class="form-group">
-                                                        <small>One of the very important thing in teaching is to set up the objectives of the week so that student should understand what they expect to be able to after completing this particular week,
-                                                        In the form bellow set up the objectives of the week and some activities that student are expected to do.</small><br>
-                                                        <label for="description" style="margin-top: 10px;">Week Description and Activities</label>
-                                                        <textarea class="form-control" name="description" id="description" rows="4" placeholder="Write down the week objectives and descriptions and what student are expecting to get after the completion of this particular lesson."></textarea>
-                                                    </div><hr>
-                                                    <div class="form-group">
-                                                        <small>You can also share lecture files (in PDF), PowerPoint presentation and notes to students.
-                                                        </small><br>
-                                                        <label for="files_data" style="margin-top: 10px;">Click on the form below to upload materials</label>
-                                                        <input type="file" class="form-control" name="files_data[]" id="files_data" multiple>
-                                                    </div><hr>
-                                                    <div class="form-group">
-                                                        <small>You can also add youtube videos links for additional resourses on some topics that seems to be complicated, and/or that need more attention to students. <br>
-                                                        <span class="text-warning" style="font-weight: bold;">Please separate the links by a semicolon </span> </small><br>
-                                                        <label for="additional_links" style="margin-top: 10px;">Add youtube video links</label>
-                                                        <input type="text" class="form-control" name="additional_links" id="additional_links" placeholder="Youtube links">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-success" style="width: 20%; float: right; background: rgb(109, 130, 74); border: none;"> Save Lesson</button>
-                                                    </div>
+                    <div class="row">
+                        <form method="POST" action="/teacher/courses/course_materials" enctype="multipart/form-data" style="margin-left: 5%; width: 80%;" class="question_wrapper">
+                            @csrf                                                    
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="assignment_course_id" name="assignment_course_id" value="{{ app('request')->input('course_id') }}">                                                        
+                                <input type="hidden" class="form-control" id="assignment_week_id" name="assignment_week_id" value="">
+                            </div>
+                            <!-- <div class="row border" style="padding: 10px; height: auto; margin-bottom: 15px;">
+                                <div class="form-group">
+                                    <label for="description" style="margin-top: 10px;">Please insert questions here</label>
+                                    <textarea class="form-control border" style="" name="questions[]" id="questions" rows="4" placeholder="Write down the question here"></textarea><br><hr>
+                                    <small>Click on the below button to add answers, and select the correct answer between multiple possible answer</small><br>
+                                    <div class="form-group" id="answers" style="max-width: 100%; margin-bottom: 10px; padding-top: 10px;">
+                                       
+                                    </div>
+                                    <a style="float: right; margin-top: 15px; margin-right: 20px; border: 1px solid rgb(109, 130, 74); border-radius: 3px; text-decoration: none; cursor: pointer; padding: 5px; font-size: 12px; color: rgb(109, 130, 74);" href="javascript:void(0);" class="add_answer" title="Add Answers"><span class="fa fa-plus" style="margin-right: 4px;"></span>Add Answers</a>
+                                </div><hr>
+                            </div> -->
+                            <hr>  
+                            <div class="row questionBef" style="margin-bottom: 13px;">
+                                <div class="col-12">
+                                    <small>Click on the button bellow to add new question and answers. <br>You can add up to 15 questions in this week  </small>
+                                    <a style="float: right; margin-top: 15px; margin-right: 20px; border: 1px solid rgb(109, 130, 74); border-radius: 3px; text-decoration: none; cursor: pointer; padding: 5px; font-size: 12px; color: rgb(109, 130, 74);" href="javascript:void(0);" class="add_question" title="Add Answers"><span class="fa fa-plus" style="margin-right: 4px;"></span>New Question</a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success" style="width: 35%; float: right; background: rgb(109, 130, 74); border: none;">Save Assessmemt</button>
+                            </div>
                         </form>
-
                     </div>
+                    
                 </div>
             </div>   
             </div>
