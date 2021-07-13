@@ -74,7 +74,7 @@ class AdditionalCourseMaterialsController extends Controller
                             $materials->powerpoint_presentation = $uploaded_files_info[$i]['name'];
                         if((strtolower($uploaded_files_info[$i]['extension']) == 'doc') || strtolower($uploaded_files_info[$i]['extension']) == 'docx'){
                             $other_doc = $other_doc .";". $uploaded_files_info[$i]['name'];
-                            $materials->powerpoint_presentation = $other_doc;
+                            $materials->other_reference = $other_doc;
                         }
                     }
                 }

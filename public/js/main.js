@@ -41,7 +41,7 @@ function add_answers(addAnswerButton, answersWrapper, remove_button, id){
                 <label class="form-check-label" style="color: rgb(109, 130, 74);font-size: 10px; margin-right: 5px; margin-left: 3px;" for="correctAnsw">Correct Ans</label>
             </div>
             <input type="text" style="max-width: 70%; margin-bottom:5px; float: left;" class="form-control" name="answers`+ id +`[]" value="" placeholder="Write answers here..."/>
-            <a href="javascript:void(0);" style="max-width: 8%;  float: left;" class="remove_button"><span class="fa fa-times" style="margin-right: 4px; color: rgb(109, 130, 74); font-size: 22px; margin-left: 10px;"></span></a>
+            <a href="javascript:void(0);" style="max-width: 8%;  float: left;" class="`+ remove_button +`"><span class="fa fa-times" style="margin-right: 4px; color: rgb(109, 130, 74); font-size: 22px; margin-left: 10px;"></span></a>
         </div>
     `;       
     $("."+ addAnswerButton).click(function(){
