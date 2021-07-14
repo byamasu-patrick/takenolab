@@ -33,21 +33,19 @@ window.onload = () => {
 };
 function add_answers(addAnswerButton, answersWrapper, remove_button, id){
     let counter = 1;
-    let maxAnsField = 5;
-    let answerHTML = `
-        <div class="row">
-            <div class="form-check form-switch" style="max-width: 20%; margin-left: 15px; margin-bottom:5px; float: left;">
-                <input class="form-check-input" name="correctAnsw`+ id +`" style="background-color: rgb(109, 130, 74);" type="radio" id="correctAnsw">
-                <label class="form-check-label" style="color: rgb(109, 130, 74);font-size: 10px; margin-right: 5px; margin-left: 3px;" for="correctAnsw">Correct Ans</label>
-            </div>
-            <input type="text" style="max-width: 70%; margin-bottom:5px; float: left;" class="form-control" name="answers`+ id +`[]" value="" placeholder="Write answers here..."/>
-            <a href="javascript:void(0);" style="max-width: 8%;  float: left;" class="`+ remove_button +`"><span class="fa fa-times" style="margin-right: 4px; color: rgb(109, 130, 74); font-size: 22px; margin-left: 10px;"></span></a>
-        </div>
-    `;       
+    let maxAnsField = 5;         
     $("."+ addAnswerButton).click(function(){
         if (counter < maxAnsField) {
-            //alert(counter);
-            $("."+ answersWrapper).append(answerHTML);
+            //alert(counter);            
+            $("."+ answersWrapper).append(`
+            <div class="row">
+                <div class="form-check form-switch" style="max-width: 20%; margin-left: 15px; margin-bottom:5px; float: left;">
+                    <input class="form-check-input" name="correctAnsw`+ id +`" style="background-color: rgb(109, 130, 74);" type="radio" id="correctAnsw" value="`+ counter +`">
+                    <label class="form-check-label" style="color: rgb(109, 130, 74);font-size: 10px; margin-right: 5px; margin-left: 3px;" for="correctAnsw">Correct Ans</label>
+                </div>
+                <input type="text" style="max-width: 70%; margin-bottom:5px; float: left;" class="form-control" name="answers`+ id +`[]" value="" placeholder="Write answers here..."/>
+                <a href="javascript:void(0);" style="max-width: 8%;  float: left;" class="`+ remove_button +`"><span class="fa fa-times" style="margin-right: 4px; color: rgb(109, 130, 74); font-size: 22px; margin-left: 10px;"></span></a>
+            </div>`);
             counter++;
         }
     });
@@ -103,6 +101,7 @@ function weekSetting(course_id, week_id){
 
             $("#setting"+ week_id).attr("disabled", true);
             $("#setting_week_id").val(week_id);
+            $("#assignment_week_id").val(week_id);
         // } else {
         //     $("#primary").css("display", "block");
         //     $("#secondary").css("display", "none");
