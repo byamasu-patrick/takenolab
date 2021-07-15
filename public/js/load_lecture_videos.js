@@ -2,25 +2,26 @@ let indexVideo = 0;
 let courses_g = 0;
 let lecture_video_g = 0;
 let topicId = 0;
-window.onload = function(){
-    //$('#prev').attr('disabled', true);
-    alert("Hello");
-    // $("#video_to_play video").bind("ended", function(){
-    //     alert("Video has finished to play... \n Click okay to load the next video");
-    //     //Register the progress and load next video not continue learning
-    //     // let iterator = indexVideo;         
-    //     // if (((lecture_video_g[iterator + 1].topic_id) == (topicId + 1))) {
-    //     //     //Then load prompt a message that you reached at the end of the week, you need to take your quiz
-    //     //     alert("Please take your quiz for this week!");
-    //     //     sendProgressVideo(lecture_video_g[indexVideo].course_id, lecture_video_g[indexVideo].id, lecture_video_g[indexVideo].topic_id);
-    //     // }
-    //     // else{
-    //     //     sendProgressVideo(lecture_video_g[indexVideo].course_id, lecture_video_g[indexVideo].id, lecture_video_g[indexVideo].topic_id);
-    //     //     loadNextVideo(courses_g, lecture_video_g, index);
-    //     // }
+window.addEventListener("load", function(){
+    $("#video_to_play video").bind("ended", function(){
+        console.log(courses_g);
+        //Register the progress and load next video not continue learning
+        let iterator = indexVideo;         
+        if (((lecture_video_g[iterator + 1].topic_id) == (topicId + 1))) {
+            //Then load prompt a message that you reached at the end of the week, you need to take your quiz
+            sendProgressVideo(lecture_video_g[indexVideo].course_id, lecture_video_g[indexVideo].id, lecture_video_g[indexVideo].topic_id);
+            $('#courseSetting').modal('toggle');
+            $('#courseSetting').modal('show');
+            $('#courseSetting').modal('hide');            
+        }
+        else{
+            sendProgressVideo(lecture_video_g[indexVideo].course_id, lecture_video_g[indexVideo].id, lecture_video_g[indexVideo].topic_id);
+            loadNextVideo(courses_g, lecture_video_g, indexVideo);
+        }
         
-    // });
-};
+    });
+});
+//
 function getVideos(courses, lecture_video, currentIndexPlayed, weekInProgress){
     try {        
         if (courses_g == 0 && lecture_video_g == 0) {            
@@ -33,6 +34,7 @@ function getVideos(courses, lecture_video, currentIndexPlayed, weekInProgress){
                 $("#week_1").attr("disabled", false);
             }
         }
+        //loadData();
     } catch (error) {
         console.log(error);
     }

@@ -3,6 +3,7 @@
 @section('content')
 <div class="container-fluid">
 <div class="row">  
+
     <div class="col-lg-3">
                 <div class="dropdown mr-1">
                             <div class="accordion" id="course_topic">
@@ -132,19 +133,28 @@
                 <div class="modal-content">                        
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-9">                                
+                                <span class="text-lg" style="font-size: 25px; font-weight: bold; font-style: 'Comic Sans MS'"><img src="http://127.0.0.1:8000/images/logo.png" width="50" width="50" class="u-logo-image u-logo-image-1" data-image-width="64" style="margin-right: 10px; color: rgb(109, 130, 74);">  {{ Auth::user()->name }}</span>
+                            </div>
+                            <div class="col-3">
                                 <button type="button" style="float: right; color: rgb(109, 130, 74);" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                        </div>
+                        </div><hr>
                         <div class="row">
                             <div class="col-12">
-                                <small>Do you reall want to continue with this action? <br> If you click yes chnages will be made</small>
+                                <small style="font-weight: bold;">Congratulation for finishing this week's videos. In order to continue with your learning, you first need to take this small quiz to test the knowledge
+                                that you acquired in this week.</small>
+                                <ul style="margin-right: 10px;">
+                                    <li><small>To start your quiz click on the button below and start your quiz</small></li>
+                                    <li><small>If you are not ready now, click on this link to reschedule your quiz <a href="#">Reschedule here</a>.<br>
+                                    <span><span  style="margin-left: -18px; mering-right: 8px; font-size: 20px;" class="fa fa-exclamation-triangle text-warning"></span> But you will not be able to continue learning with out taking this quiz</span></small></li>
+                                </ul>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-12"><a href="javascript:void(0);" id="confirm" type="button" class="btn" style="float: right; background-color: rgb(109, 130, 74); color: #fff;" class="close" data-dismiss="modal" aria-label="Close">Yes</a></div>
+                            <div class="col-12"><a href="/assessment/{{ app('request')->input('course_id') }}/take?QTL={{ csrf_token() }}" id="confirm" type="button" class="btn" style="float: right; background-color: rgb(109, 130, 74); color: #fff;" class="close" data-dismiss="modal" aria-label="Close">Take the Quiz</a></div>
                         </div>                            
                     </div>
                 </div>

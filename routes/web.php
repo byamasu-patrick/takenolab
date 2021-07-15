@@ -70,4 +70,4 @@ Route::get('/student/explore', [App\Http\Controllers\EnrolledCoursesController::
 Route::post('/student/account/edit', [App\Http\Controllers\StudentController::class, 'edit_account'])->name('student');
 Route::post('/student/profile/edit', [App\Http\Controllers\StudentController::class, 'change_profile'])->name('student');
 Route::post('/student/courses/progress', [App\Http\Controllers\LearningProgressController::class, 'new_progress'])->name('student');
-
+Route::get('/assessment/{id}/take', [App\Http\Controllers\QuizesController::class, 'index'])->name("student");
