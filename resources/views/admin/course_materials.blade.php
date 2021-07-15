@@ -18,7 +18,7 @@
                             @else
                                 <li><a class="dropdown-item" id="stateHiden" onclick="saveCourseSettings({{ app('request')->input('course_id') }}, 'hidden')" href="javascript:void(0);" style="color: rgb(109, 130, 74);" data-toggle="modal" data-target="#courseSetting"> <span style="margin-right: 5px;" class="fa fa-eye-slash"></span>Hide Course</a></li>
                             @endif
-                                <li><a class="dropdown-item" onclick="viewEnrolledStudent({{ app('request')->input('course_id') }})" href="javascript:void(0);" style="color: rgb(109, 130, 74);" data-toggle="modal" data-target="#courseSetting"> <span style="margin-right: 5px;" class="fa fa-street-view"></span> View enrolled student</a></li>
+                                <li><a class="dropdown-item" href="/admin/{{ app('request')->input('course_id') }}/enrolled-student" style="color: rgb(109, 130, 74);"> <span style="margin-right: 5px;" class="fa fa-street-view"></span> View enrolled student</a></li>
                         </ul>
                     </div>
                 </div>

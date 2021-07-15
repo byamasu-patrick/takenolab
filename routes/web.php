@@ -38,6 +38,7 @@ Route::post('/admin/courses/create_topics',  [App\Http\Controllers\TopicControll
 Route::post('/admin/courses', [App\Http\Controllers\CourseController::class, 'create'])->name('admin');
 Route::get('/admin/courses/assign/{id}', [App\Http\Controllers\CourseController::class, 'assign_teacher'])->name('admin');
 Route::get('/admin/courses/course_materials', [App\Http\Controllers\AdminController::class, 'view_course_details'])->name('admin');
+Route::get('/admin/{id}/enrolled-student', [App\Http\Controllers\CourseController::class, 'getEnrolledStudent'])->name("admin");
 // Adding new video materials for a specific topic and subtopic
 Route::post('/admin/courses/course_materials', [App\Http\Controllers\AdminController::class, 'create_lessons'])->name('admin');
 

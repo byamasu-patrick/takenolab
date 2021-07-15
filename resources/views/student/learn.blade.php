@@ -126,6 +126,31 @@
             </div>  
         </div>
     </div>
+    <div class="col-12">                    
+        <div class="modal fade" id="courseSetting" tabindex="-1" role="dialog" aria-labelledby="courseSettingTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">                        
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="button" style="float: right; color: rgb(109, 130, 74);" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <small>Do you reall want to continue with this action? <br> If you click yes chnages will be made</small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12"><a href="javascript:void(0);" id="confirm" type="button" class="btn" style="float: right; background-color: rgb(109, 130, 74); color: #fff;" class="close" data-dismiss="modal" aria-label="Close">Yes</a></div>
+                        </div>                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </div>
 @endsection

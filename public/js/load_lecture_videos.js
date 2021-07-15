@@ -1,30 +1,28 @@
-
 let indexVideo = 0;
 let courses_g = 0;
 let lecture_video_g = 0;
 let topicId = 0;
 window.onload = function(){
-    $('#prev').attr('disabled', true);
-    $("#video_to_play video").bind("ended", function(){
-        alert("Video has finished to play... \n Click okay to load the next video");
-        index = indexVideo;
-        //Register the progress and load next video not continue learning
-        //console.log(lecture_video); 
-        let iterator = indexVideo; 
-        if (((lecture_video_g[iterator + 1].topic_id) == (topicId + 1))) {
-            //Then load prompt a message that you reached at the end of the week, you need to take your quiz
-            alert("Please take your quiz for this week!");
-            sendProgressVideo(lecture_video_g[indexVideo].course_id, lecture_video_g[indexVideo].id, lecture_video_g[indexVideo].topic_id);
-        }
-        else{
-            sendProgressVideo(lecture_video_g[indexVideo].course_id, lecture_video_g[indexVideo].id, lecture_video_g[indexVideo].topic_id);
-            loadNextVideo(courses_g, lecture_video_g, index);
-        }
+    //$('#prev').attr('disabled', true);
+    alert("Hello");
+    // $("#video_to_play video").bind("ended", function(){
+    //     alert("Video has finished to play... \n Click okay to load the next video");
+    //     //Register the progress and load next video not continue learning
+    //     // let iterator = indexVideo;         
+    //     // if (((lecture_video_g[iterator + 1].topic_id) == (topicId + 1))) {
+    //     //     //Then load prompt a message that you reached at the end of the week, you need to take your quiz
+    //     //     alert("Please take your quiz for this week!");
+    //     //     sendProgressVideo(lecture_video_g[indexVideo].course_id, lecture_video_g[indexVideo].id, lecture_video_g[indexVideo].topic_id);
+    //     // }
+    //     // else{
+    //     //     sendProgressVideo(lecture_video_g[indexVideo].course_id, lecture_video_g[indexVideo].id, lecture_video_g[indexVideo].topic_id);
+    //     //     loadNextVideo(courses_g, lecture_video_g, index);
+    //     // }
         
-    });
-}
+    // });
+};
 function getVideos(courses, lecture_video, currentIndexPlayed, weekInProgress){
-    try {
+    try {        
         if (courses_g == 0 && lecture_video_g == 0) {            
             courses_g = courses;
             lecture_video_g = lecture_video;
@@ -41,7 +39,7 @@ function getVideos(courses, lecture_video, currentIndexPlayed, weekInProgress){
 }
 function loadNextVideo(courses, lecture_video)
 {
-    try {        
+    try {   
         if ((indexVideo == 0)) {
             $('#prev').attr('disabled', true);
             indexVideo = indexVideo + 1;

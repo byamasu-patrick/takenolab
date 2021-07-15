@@ -89,8 +89,8 @@
                 </ul>
             </div>
             <div class="col-lg-6">  
-                <small>You add new courses here, student will be able to see the newly added courses. Oonce you add a course, the course will have a default visibility that is hidden. <br>
-                After adding a course, you will be required to also add set its visibility to "Visible" so that it should be visible to everyone </small>             
+                <small>You add new courses here, student will be able to see the newly added courses. Oonce you add a course, the course will have a default visibility that is hidden. <br> 
+                After adding a course, you will be required to also add set its visibility to "Visible" so that it should be visible to everyone.</small><br><br>
                 <div class="card" id="edit_acc" style="display: block;" >
                     <div class="card-body">
                         <form method="POST" action="/admin/courses" enctype="multipart/form-data">

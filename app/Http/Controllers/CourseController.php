@@ -204,4 +204,16 @@ class CourseController extends Controller
             "status" => FALSE
         ]);
     }
+    public function getEnrolledStudent($course_id){
+        try {
+            if ((Auth::user()->id > 0) && (Auth::user()->account_type == "administrator")) {
+                dd("Arrived");
+            }
+            return redirect()->back()->with('success', 'You do not have the rights to access this pages!'); 
+            
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->back()->with('success', 'An error occured during the load of the data');   
+        }
+    }
 }
