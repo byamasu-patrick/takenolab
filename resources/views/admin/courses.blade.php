@@ -6,9 +6,9 @@
     @include('admin.header')
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <div class="col-lg-10">
-        <div class="row">
-            <div class="col-lg-5">
-                <div class="card">
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-lg-5 border" style="margin-left: 20px; overflow: auto; height: 800px; margin-bottom: 20px;">
+                <div class="">
                     <span class="btn material-icons-outlined">Courses Offered</span>                   
                         <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -41,7 +41,7 @@
                         </div>
                         </div>
                 </div>
-                <ul class = "list-group" style="list-style: none; padding: 0px; margin: 0px;">
+                <ul class = "list-group" style="list-style: none; padding: 0px; margin-left: 10px;">
                     @for($i = 0; $i < count($courses); ++$i)
                         <li class = "c-list-data"  style="padding: 0px;">
                             <div class="row"  style="padding: 0px; margin: 0px;">
@@ -88,56 +88,9 @@
                 @endif
                 </ul>
             </div>
-            <div class="col-lg-7">
-                <!-- <div class="" id="row_profile" style="display: none;">
-                    <div class="profile">
-                            <div class="profile-sidebar">
-                               
-                                <div class="profile-userpic">
-                                    <img src="{{ asset('images/logo.png') }}" width="70" height="70" class="img-responsive" alt="">
-                                </div>
-                                
-                                <div class="profile-usertitle">
-                                    <div class="profile-usertitle-name">
-                                       <h3>Don Nshombo Gobbi</h3>
-                                    </div>
-                                    <div class="profile-usertitle-job" style="margin-bottom: 10px;">
-                                        Developer
-                                    </div>
-                                </div>
-                                <div class="profile-userbuttons">
-                                    <button type="button" class="btn btn-primary btn-sm">Twitter</button>
-                                    <button type="button" class="btn btn-danger btn-sm">LinkedIn</button>
-                                    <button type="button" class="btn btn-success btn-sm">Facabook</button>
-                                    <button type="button" class="btn btn-secondary btn-sm">Instagram</button>
-                                </div>
-                                <div class="profile-usermenu">
-                                    <ul class="nav" style="padding: 15px 10px;">
-                                        <li class="active">
-                                            <a href="#">
-                                            <i class="glyphicon glyphicon-home"></i>
-                                            Overview </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                            <i class="glyphicon glyphicon-email"></i>
-                                            Email </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" target="_blank">
-                                            <i class="glyphicon glyphicon-ok"></i>
-                                            Phone Number </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                            <i class="glyphicon glyphicon-flag"></i>
-                                            Accounts Setting </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                    </div>
-                </div> -->
+            <div class="col-lg-6">  
+                <small>You add new courses here, student will be able to see the newly added courses. Oonce you add a course, the course will have a default visibility that is hidden. <br>
+                After adding a course, you will be required to also add set its visibility to "Visible" so that it should be visible to everyone </small>             
                 <div class="card" id="edit_acc" style="display: block;" >
                     <div class="card-body">
                         <form method="POST" action="/admin/courses" enctype="multipart/form-data">

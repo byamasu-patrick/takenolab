@@ -2,15 +2,51 @@
 
 @section('content')
 <div class="container-fluid">
+    
     <div class="row">        
         <link rel="stylesheet" href="{{ asset('css/entrepreneurship.css') }}" media="screen">
         @include('admin.header')
         <div class="col-10">
-            <div class="row" style="height: 180px; text-align: center; background: orange">
+            <div class="row" style="height: 180px; text-align: center; background: #f8f9fa;">
                 <div class="col-12">
-                    <h1 style="color:white; font-weight: bold; "> {{ $courses->course_name }} </h1>
-                    <a href="http://" class="btn btn-lg" style="background: rgb(109, 130, 74); color:white; margin-top: 30px;" target="_blank" rel="noopener noreferrer">View Enrolled</a>
-                </div>                
+                    <h1 style="color:#000; font-weight: bold; "> {{ $courses->course_name }} </h1>
+                    <div class="btn-group dropright">
+                        <button type="button" id="course_settings" class="btn btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgb(109, 130, 74); color:white; margin-top: 30px;" target="_blank" rel="noopener noreferrer"> <span class="fas fa-cogs"></span> Settings</button>
+                        <ul class="dropdown-menu" id="setting-list">
+                            @if($courses->status == "hidden")
+                                <li><a class="dropdown-item" id="stateVisible" onclick="saveCourseSettings({{ app('request')->input('course_id') }}, 'visible')" href="javascript:void(0);" style="color: rgb(109, 130, 74);" data-toggle="modal" data-target="#courseSetting"> <span style="margin-right: 5px;" class="fa fa-eye"></span> Set visible</a></li>
+                            @else
+                                <li><a class="dropdown-item" id="stateHiden" onclick="saveCourseSettings({{ app('request')->input('course_id') }}, 'hidden')" href="javascript:void(0);" style="color: rgb(109, 130, 74);" data-toggle="modal" data-target="#courseSetting"> <span style="margin-right: 5px;" class="fa fa-eye-slash"></span>Hide Course</a></li>
+                            @endif
+                                <li><a class="dropdown-item" onclick="viewEnrolledStudent({{ app('request')->input('course_id') }})" href="javascript:void(0);" style="color: rgb(109, 130, 74);" data-toggle="modal" data-target="#courseSetting"> <span style="margin-right: 5px;" class="fa fa-street-view"></span> View enrolled student</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12">                    
+                    <div class="modal fade" id="courseSetting" tabindex="-1" role="dialog" aria-labelledby="courseSettingTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">                        
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button type="button" style="float: right; color: rgb(109, 130, 74);" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <small>Do you reall want to continue with this action? <br> If you click yes chnages will be made</small>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"><a href="javascript:void(0);" id="confirm" type="button" class="btn" style="float: right; background-color: rgb(109, 130, 74); color: #fff;" class="close" data-dismiss="modal" aria-label="Close">Yes</a></div>
+                                    </div>                            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>             
             </div>
             <div class="row"  style="margin-top: 20px;">
                 <div class="col-12">

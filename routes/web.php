@@ -32,6 +32,7 @@ Route::get('/admin/courses/teachers', [App\Http\Controllers\AdminController::cla
 // Administrator's courses routes
 Route::get('/admin/courses', [App\Http\Controllers\CourseController::class, 'courses'])->name('admin');
 //Route::get('/admin/courses/{id}', [App\Http\Controller\CourseController::class, 'course'])->name('admin');
+Route::post('/admin/courses/{id}/visibility', [App\Http\Controllers\CourseController::class, 'course_visibility'])->name("admin");
 Route::get('/admin/courses/course_details',  [App\Http\Controllers\CourseController::class, 'course_details'])->name('admin');
 Route::post('/admin/courses/create_topics',  [App\Http\Controllers\TopicController::class, 'create'])->name('admin');
 Route::post('/admin/courses', [App\Http\Controllers\CourseController::class, 'create'])->name('admin');

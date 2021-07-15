@@ -12,6 +12,7 @@ use App\Models\EnrolledCourses;
 use App\Models\DiscussionForum;
 use App\Models\DiscussionComments;
 use App\Models\CourseMaterials;
+use App\Models\LearningProgress;
 use Illuminate\Support\Facades\Hash;
 
 use Auth;
@@ -65,8 +66,12 @@ class EnrolledCoursesController extends Controller
     public function learn(){
          //Check if the user is authenticated, if not then redirect them to the same page with a message
         if ((Auth::user()->id > 0) && (Auth::user()->account_type == 'student')) {
+            $courses = $this->get_course_by_id(request('course_id'));
+            if($courses == NULL)
+                return redirect("/student");
+            // Return 
             return view('student.learn', [
-                'courses' => $this->get_course_by_id(request('course_id')),
+                'courses' => $courses,
                 'discussions' => $this->getLauchedDiscussion(request('course_id')),
                 'videos_lecture' => $this->getFirstVideo((int) request('course_id'))
             ]);
@@ -78,8 +83,11 @@ class EnrolledCoursesController extends Controller
             //code...
             if ((Auth::user()->id > 0) && (Auth::user()->account_type == 'student')) {
                 //Getting the courses taken and progress
-                $enrolled = EnrolledCourses::where('user_id', Auth::user()->id)->pluck('course_id')->all();
-                $courses = Course::whereNotIn('id', $enrolled)->get();
+                $enrolled = EnrolledCourses::where('user_id', Auth::user()->id)
+                    ->pluck('course_id')->all();
+                $courses = Course::whereNotIn('id', $enrolled)                
+                    ->where("status", "visible")
+                    ->get();                
                 if (count($courses) > 0) {
                     # code...]
                     $index  = 0;
@@ -119,33 +127,37 @@ class EnrolledCoursesController extends Controller
             //Checking the currently logged in user and then send the information to the user
             if ((Auth::user()->id > 0) && (Auth::user()->account_type == "student")) {
                 # The query parameters sent from the header request file.
-                $course_informations = Course::where('id', (int) $course_id)->first();
+                $course_informations = Course::where('id', (int) $course_id)
+                    ->where("status", "visible")
+                    ->first();
                 // Getting all the topics and subtopics for enrolling the courses
-                $topics_data = Topic::where('course_id', $course_informations->id)->get();
-                $topics = array();
-                if(count($topics_data) > 0){
-                    for ($j = 0; $j < count($topics_data); $j++) { 
-                        # code...
-                        $topic_ = $topics_data[$j];
-                        $subtopic = Subtopic::where('topic_id', $topics_data[$j]->id)->get();
-                        //dd($subtopic); 
-                        if (count($subtopic) > 0) {
-                            # code...  
-                            $topic_['subtopics'] = $subtopic;     
-                        }
-                        $topics[$j] = $topic_;
-                        //dd($topics);
-                        
-                    }                       
-                    $course_informations['topics'] = $topics;
-                }
-                //dd($course_informations);
-                return $course_informations;
-
+                //dd(is_null($course_informations));
+                if(!is_null($course_informations)){
+                    $topics_data = Topic::where('course_id', $course_informations->id)->get();
+                    $topics = array();
+                    if(count($topics_data) > 0){
+                        for ($j = 0; $j < count($topics_data); $j++) { 
+                            # code...
+                            $topic_ = $topics_data[$j];
+                            $subtopic = Subtopic::where('topic_id', $topics_data[$j]->id)->get();
+                            //dd($subtopic); 
+                            if (count($subtopic) > 0) {
+                                # code...  
+                                $topic_['subtopics'] = $subtopic;     
+                            }
+                            $topics[$j] = $topic_;
+                            //dd($topics);
+                            
+                        }                       
+                        $course_informations['topics'] = $topics;
+                    }
+                    return $course_informations;
+                }   
+                return NULL;
             }
         } catch (\Throwable $th) {
             //throw $th;
-            dd(["Error" => "Error while fetching the database"]);
+            return NULL;
         }
     }
     protected function getLauchedDiscussion($course_id){
@@ -201,9 +213,22 @@ class EnrolledCoursesController extends Controller
                     ->where("course_id", $course_id)
                     ->orderBy('course_materials.topic_id', 'ASC')
                     ->orderBy('course_materials.id', 'ASC')
-                    ->get(['course_materials.*', 'courses.course_name']);
+                    ->get(['course_materials.*', 'courses.course_name']);                   
                 if (count($video_lecture) > 0) {
-                    # code...
+                    # Check videos that have already been played and assign to it the status
+                    $i = 0;
+                    while ($i < count($video_lecture)) {
+                        $video_played_ = LearningProgress::where("course_id", $course_id)
+                        ->where("week_id", $video_lecture[$i]->topic_id)
+                        ->where("video_played", $video_lecture[$i]->id)
+                        ->first();
+                        if(!is_null($video_played_))
+                            $video_lecture[$i]["played_state"] = TRUE;
+                        else
+                            $video_lecture[$i]["played_state"] = FALSE;
+                        $i++;
+                    } 
+                    //dd($video_lecture);
                     return $video_lecture;
                 }
                 return NULL;

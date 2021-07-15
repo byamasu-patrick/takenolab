@@ -28,7 +28,10 @@ class StudentController extends Controller
     {
         if ((Auth::user()->id != 0) && (Auth::user()->account_type == 'student')) {
             # code...
-                $courses = Course::join('enrolled_courses', 'enrolled_courses.course_id', '=', 'courses.id')->where('enrolled_courses.user_id', (int) Auth::user()->id )->get(['courses.*', 'enrolled_courses.course_progress']);
+                $courses = Course::join('enrolled_courses', 'enrolled_courses.course_id', '=', 'courses.id')
+                    ->where('enrolled_courses.user_id', (int) Auth::user()->id )
+                    ->where('courses.status', "visible")
+                    ->get(['courses.*', 'enrolled_courses.course_progress']);
                 if (count($courses) > 0) {
                     # code...]
                     $index  = 0;
@@ -130,7 +133,7 @@ class StudentController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
             if(Auth::user()->id == $id){                
-                redirect('/student');
+                return redirect('/student');
             }
         }
        
