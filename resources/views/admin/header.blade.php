@@ -8,7 +8,6 @@
                       
                             <a class="nav-link " href="/admin/accounts"><i class="fas fa-users" style="font-size: 20px; margin-right: 5px;"></i><span>Accounts</span></a>
                             <a class="nav-link" href="/admin/courses"><i class="fas fa-list" style="font-size: 20px; margin-right: 5px;"></i><span>Courses</span></a>
-                            <a class="nav-link" href="/admin/students"><i class="fas fa-shopping-bag" style="font-size: 20px; margin-right: 5px;"></i><span>Students</span></a>
                             <a class="nav-link" href="/admin/assignteachers"><i class="fas fa-cogs" style="font-size: 20px; margin-right: 5px;"></i><span>Settings</span></a>
                             <a class="nav-link" href="/admin/addstudents"><i class="fas fa-users-cog" style="font-size: 20px; margin-right: 5px;"></i><span>Terms and Conditions</span></a>
                 </ul>

@@ -1,3 +1,10 @@
+window.onload = function(){
+  $("#course_settings").click(function(e){
+    //e.preventDefault();
+
+  });
+};
+
 function updateAccounts(url_link){
     $('#row_profile').hide();
     $('#edit_acc').show();
@@ -134,7 +141,7 @@ function sendFormData(id){
         error:function(){ 
           alert("Error!!!!");
       }
-    });
+      });
     //if(){        
      
     //}
@@ -212,5 +219,80 @@ function assignTeacherToCourse(link){
     
   } catch (error) {
     
+  }
+}
+// Course setting
+function saveCourseSettings(course_id, status){
+  try {
+    $("#confirm").click(function(e){
+      $.ajax({
+        url: '/admin/courses/'+ course_id +'/visibility',
+        type: 'POST',
+        dataType: 'JSON',
+        beforeSend: function (xhr){
+          // Let first register the CSRF_TOKEN to the header of the ajax request      
+          // determining the token
+          var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+          console.log(CSRF_TOKEN);
+          if(CSRF_TOKEN){
+            return xhr.setRequestHeader('X-CSRF_TOKEN', CSRF_TOKEN);
+          }
+        },
+        data:{
+          'course_id': course_id,
+          'status': status,
+        },
+        success: function(result){
+            console.log(result.status);   
+            if (result.status == true) {
+              location.reload();
+            }      
+        },
+        error:function(){ 
+          alert("Error!!!!");
+      }
+      });
+    });    
+  } catch (error) {
+    console.log(error);
+  }
+}
+function viewEnrolledStudent(){
+  try {
+    // $.ajax({
+    //   url: '/admin/courses/',
+    //   type: 'POST',
+    //   dataType: 'JSON',
+    //   beforeSend: function (xhr){
+    //     // Let first register the CSRF_TOKEN to the header of the ajax request      
+    //     // determining the token
+    //     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    //     console.log(CSRF_TOKEN);
+    //     if(CSRF_TOKEN){
+    //       return xhr.setRequestHeader('X-CSRF_TOKEN', CSRF_TOKEN);
+    //     }
+    //   },
+    //   data:{
+    //     'course_id': id,
+    //     'topic_name': topicName,
+    //     'first_subtopic': firstSubtopicName,
+    //     'second_subtopic': secondSubtopicName,
+    //     'third_subtopic': thirdSubtopicName
+    //   },
+    //   success: function(result){
+    //       console.log(result);
+    //       $("#topic_name").val("");
+    //       $("#first_subtopic").val("");
+    //       $("#second_subtopic").val("");
+    //       $("#third_subtopic").val("");
+    //      //this.abort();
+         
+    //   },
+    //   error:function(){ 
+    //     alert("Error!!!!");
+    // }
+    // });
+  } catch (error) {
+    console.log(error);
   }
 }

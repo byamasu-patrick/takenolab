@@ -225,23 +225,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <form method="POST" action="/teacher/courses/course_materials" enctype="multipart/form-data" style="margin-left: 5%; width: 80%;" class="question_wrapper">
+                        <form method="POST" action="/teacher/courses/create_assessement" enctype="multipart/form-data" style="margin-left: 5%; width: 80%;" class="question_wrapper">
                             @csrf                                                    
                             <div class="form-group">
                                 <input type="hidden" class="form-control" id="assignment_course_id" name="assignment_course_id" value="{{ app('request')->input('course_id') }}">                                                        
                                 <input type="hidden" class="form-control" id="assignment_week_id" name="assignment_week_id" value="">
-                            </div>
-                            <!-- <div class="row border" style="padding: 10px; height: auto; margin-bottom: 15px;">
-                                <div class="form-group">
-                                    <label for="description" style="margin-top: 10px;">Please insert questions here</label>
-                                    <textarea class="form-control border" style="" name="questions[]" id="questions" rows="4" placeholder="Write down the question here"></textarea><br><hr>
-                                    <small>Click on the below button to add answers, and select the correct answer between multiple possible answer</small><br>
-                                    <div class="form-group" id="answers" style="max-width: 100%; margin-bottom: 10px; padding-top: 10px;">
-                                       
-                                    </div>
-                                    <a style="float: right; margin-top: 15px; margin-right: 20px; border: 1px solid rgb(109, 130, 74); border-radius: 3px; text-decoration: none; cursor: pointer; padding: 5px; font-size: 12px; color: rgb(109, 130, 74);" href="javascript:void(0);" class="add_answer" title="Add Answers"><span class="fa fa-plus" style="margin-right: 4px;"></span>Add Answers</a>
-                                </div><hr>
-                            </div> -->
+                            </div>                            
                             <hr>  
                             <div class="row questionBef" style="margin-bottom: 13px;">
                                 <div class="col-12">

@@ -32,11 +32,13 @@ Route::get('/admin/courses/teachers', [App\Http\Controllers\AdminController::cla
 // Administrator's courses routes
 Route::get('/admin/courses', [App\Http\Controllers\CourseController::class, 'courses'])->name('admin');
 //Route::get('/admin/courses/{id}', [App\Http\Controller\CourseController::class, 'course'])->name('admin');
+Route::post('/admin/courses/{id}/visibility', [App\Http\Controllers\CourseController::class, 'course_visibility'])->name("admin");
 Route::get('/admin/courses/course_details',  [App\Http\Controllers\CourseController::class, 'course_details'])->name('admin');
 Route::post('/admin/courses/create_topics',  [App\Http\Controllers\TopicController::class, 'create'])->name('admin');
 Route::post('/admin/courses', [App\Http\Controllers\CourseController::class, 'create'])->name('admin');
 Route::get('/admin/courses/assign/{id}', [App\Http\Controllers\CourseController::class, 'assign_teacher'])->name('admin');
 Route::get('/admin/courses/course_materials', [App\Http\Controllers\AdminController::class, 'view_course_details'])->name('admin');
+Route::get('/admin/{id}/enrolled-student', [App\Http\Controllers\CourseController::class, 'getEnrolledStudent'])->name("admin");
 // Adding new video materials for a specific topic and subtopic
 Route::post('/admin/courses/course_materials', [App\Http\Controllers\AdminController::class, 'create_lessons'])->name('admin');
 
@@ -68,4 +70,6 @@ Route::get('/student/explore', [App\Http\Controllers\EnrolledCoursesController::
 Route::post('/student/account/edit', [App\Http\Controllers\StudentController::class, 'edit_account'])->name('student');
 Route::post('/student/profile/edit', [App\Http\Controllers\StudentController::class, 'change_profile'])->name('student');
 Route::post('/student/courses/progress', [App\Http\Controllers\LearningProgressController::class, 'new_progress'])->name('student');
-
+Route::get('/assessment/{id}/take', [App\Http\Controllers\QuizesController::class, 'index'])->name("student");
+Route::get('/assessment/{course_id}/{week_id}/start', [App\Http\Controllers\QuizesController::class, 'start'])->name("student");
+Route::post('/assessment/{course_id}/{week_id}/result', [App\Http\Controllers\QuizesController::class, 'result'])->name("student");

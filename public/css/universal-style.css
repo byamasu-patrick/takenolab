@@ -1,0 +1,42 @@
+
+ .u-button-col:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(109, 130, 74);
+    border-radius: none;
+    border: 1px solid rgb(109, 130, 74);
+    text-decoration: none;
+  }
+  .u-button-col{
+    float: right; 
+    font-size: 18px; 
+    background-color: rgb(109, 130, 74); 
+    margin-right: 10%; 
+    border-radius: 0px; 
+    color: #fff; 
+    padding: 15px;
+    border: none;
+  }
+ .course-list{
+   cursor: pointer;
+   margin-top: 0px;
+   margin-bottom: 0px;
+   margin-left: 2%; 
+   font-size: 13px;
+ }
+ .course-list:hover{
+   text-decoration: underline;
+   color: rgb(109, 130, 74);
+   font-weight: bold;
+ }
+ .description{
+    padding: 2px;
+    border: 1px solid rgb(109, 130, 74);
+    background-color: rgb(255, 255, 255);
+    color: rgb(109, 130, 74);
+  
+ }
+ .description:hover{
+    border: 1px solid rgb(109, 130, 74);
+    color: rgb(255, 255, 255);
+    background-color: rgb(109, 130, 74);
+ }

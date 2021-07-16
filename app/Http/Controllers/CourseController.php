@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 use App\Models\Course;
 use App\Models\Topic;
 use App\Models\Subtopic;
@@ -170,6 +171,50 @@ class CourseController extends Controller
             }
         } catch (\Throwable $th) {
             //throw $th;
+        }
+    }
+    public function course_visibility($course_id){
+        try {
+            //Update the visibility of the courses
+            if ((Auth::user()->id > 0) && (Auth::user()->account_type == "administrator")) {
+                # Update the visibility
+                $course = Course::where("id", (int) request("course_id"))->first();
+                if (!is_null($course)) {
+                    $course->status = trim(request("status"));
+                    $course->save();
+                    unset($course);
+                    return response()->json([
+                        "message" => "The state has successfully been updated!",
+                        "status" => TRUE
+                    ]);
+                }      
+                return response()->json([
+                    'message' => "An error occured while changing the course status!",
+                    "status" => FALSE
+                ]);          
+            }
+            return response()->json([
+                'message' => "You are not allowed to perfom this action because you don't have access to this action.",
+                "status" => FALSE
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json(["message" => $th->getMessage()]);
+        }
+        return response()->json([
+            'message' => "arrived, course id is: ". request("status"),
+            "status" => FALSE
+        ]);
+    }
+    public function getEnrolledStudent($course_id){
+        try {
+            if ((Auth::user()->id > 0) && (Auth::user()->account_type == "administrator")) {
+                dd("Arrived");
+            }
+            return redirect()->back()->with('success', 'You do not have the rights to access this pages!'); 
+            
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->back()->with('success', 'An error occured during the load of the data');   
         }
     }
 }

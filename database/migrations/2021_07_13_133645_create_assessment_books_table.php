@@ -25,7 +25,7 @@ class CreateAssessmentBooksTable extends Migration
             $table->text("fourth_answer");
             $table->text("correct_answer");
             $table->integer("approved_state")->default(0);            
-            $table->text("published_state")->default(0);
+            $table->integer("published_state")->default(0);
             $table->timestamps();
         });
     }

@@ -7,6 +7,7 @@ use Auth;
 use File;
 
 class UniversalClass{
+    public static $questions = 0;
     public function __construct(){
         // Initializing global variables
     }
