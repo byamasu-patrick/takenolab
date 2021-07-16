@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 01, 2021 at 02:35 PM
+-- Generation Time: Jul 16, 2021 at 05:10 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -20,6 +20,59 @@ SET time_zone = "+00:00";
 --
 -- Database: `takenolab`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `additional_course_materials`
+--
+
+CREATE TABLE `additional_course_materials` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `topic_id` int(11) NOT NULL,
+  `week_description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `course_lecture` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `powerpoint_presentation` text COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'none',
+  `reference_link_one` text COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'none',
+  `reference_link_two` text COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'none',
+  `reference_link_three` text COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'none',
+  `reference_link_four` text COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'none',
+  `other_reference` text COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'none',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assessment_books`
+--
+
+CREATE TABLE `assessment_books` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `topic_id` int(11) NOT NULL,
+  `teacher_id` int(11) NOT NULL,
+  `question` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `first_answer` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `second_answer` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `third_answer` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fourth_answer` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `correct_answer` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `approved_state` int(11) NOT NULL DEFAULT 0,
+  `published_state` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `assessment_books`
+--
+
+INSERT INTO `assessment_books` (`id`, `course_id`, `topic_id`, `teacher_id`, `question`, `first_answer`, `second_answer`, `third_answer`, `fourth_answer`, `correct_answer`, `approved_state`, `published_state`, `created_at`, `updated_at`) VALUES
+(1, 1, 4, 5, 'how will you know if it will be successful?', 'Critical Thinking', 'Brainstorming', 'Sleeping', 'Walking', 'Sleeping', 0, 0, '2021-07-14 06:44:50', '2021-07-14 06:44:50'),
+(2, 1, 4, 5, 'What is the best way to answer this question?', 'Searching on Internet', 'Talking to people', 'Talking to Professors', 'Writing a document', 'Talking to Professors', 0, 0, '2021-07-14 06:44:50', '2021-07-14 06:44:50');
 
 -- --------------------------------------------------------
 
@@ -41,17 +94,18 @@ CREATE TABLE `courses` (
   `course_catching_area_three` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `taught_by` int(11) NOT NULL DEFAULT 1
+  `taught_by` int(11) NOT NULL DEFAULT 1,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'hidden'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`id`, `course_name`, `course_image`, `course_heading`, `course_overview`, `title_catching_area_one`, `course_catching_area_one`, `title_catching_area_two`, `course_catching_area_two`, `title_catching_area_three`, `course_catching_area_three`, `created_at`, `updated_at`, `taught_by`) VALUES
-(1, 'Entrepreneurship', 'languages.jpg', 'A Quick Guide to Starting a Business', 'Taking the first step towards a new business venture can be daunting. Knowing what to do at the start makes your business venture more likely to succeed. All aspiring entrepreneurs are welcome to enroll, regardless of their backgrounds or experience levels.', 'IDEATION', 'The idea of starting a business is usually accompanied by an idea of what you\'d like to sell, or at least the market you\'d like to enter. It is crucial to clearly understand your choice\'s rationale before you make it...', 'BUSINESS MANAGEMENT', 'There are a few questions you should ask about your business idea. For example, what is your purpose? What market are you targeting? What are your long-term goals? Your startup costs will be financed in what way? An effective business plan will answer these questions...', 'SUSTAINABILITY', 'As an entrepreneur, your task does not end with your launch and first sales. Keeping your business afloat and profitable requires continuous growth. Your business is going to require time and effort, but you\'ll be rewarded according to the amount of effort you put forth...', '2021-06-22 05:58:28', '2021-07-01 05:38:42', 15),
-(3, 'E-Lancing', '1624440711-1-E-Lancing.jpg', 'Find and service clients online', 'Making money and finding jobs is easier than ever with e-lancing. As the name implies, e-lancing involves working as a freelancer online. E-lancers typically find and service clients online.\r\n\r\n\r\nUnlike freelancers in the past, you are no longer required to advertise only in your town or from your personal network. If you know what you are doing, you can reach hundreds, thousands, and even hundreds of thousands of potential customers with an advertising budget of just a few hundred dollars.', 'THE ART OF FREELANCING', 'Here, you will learn methods for finding work online using your existing skills. In addition, it will help you approach prospective customers in a disciplined and effective way.', 'COPYWRITING & TRANCRIBING', 'You will earn $10 to $35 per hour as a transcriptionist or copywriter if you learn transcription and copywriting skills and find work with 100s of providers worldwide.', 'DATA ANALYSIS', 'The information in this topic will help you succeed as an analyst as you learn how to manipulate data types like text, times and dates, as well as create logic functions and conditional aggregations.', '2021-06-23 07:31:51', '2021-07-01 05:33:40', 6),
-(4, 'Web Development', '1625067116-1-Web Development.jpg', 'A Quick Guide to Starting a Business', 'Taking the first step towards a new business venture can be daunting. Knowing what to do at the start makes your business venture more likely to succeed. All aspiring entrepreneurs are welcome to enroll, regardless of your backgrounds or experience levels.', 'IDEATION', 'The idea of starting a business is usually accompanied by an idea of what you\'d like to sell, or at least the market you\'d like to enter. It is crucial to clearly understand your choice\'s rationale before you make it...', 'BUSINESS MANAGEMENT', 'There are a few questions you should ask about your business idea. For example, what is your purpose? What market are you targeting? What are your long-term goals? Your startup costs will be financed in what way? An effective business plan will answer these questions...', 'SUSTAINABILITY', 'As an entrepreneur, your task does not end with your launch and first sales. Keeping your business afloat and profitable requires continuous growth. Your business is going to require time and effort, but you\'ll be rewarded according to the amount of effort you put forth...', '2021-06-30 13:31:56', '2021-07-01 05:42:07', 17);
+INSERT INTO `courses` (`id`, `course_name`, `course_image`, `course_heading`, `course_overview`, `title_catching_area_one`, `course_catching_area_one`, `title_catching_area_two`, `course_catching_area_two`, `title_catching_area_three`, `course_catching_area_three`, `created_at`, `updated_at`, `taught_by`, `status`) VALUES
+(1, 'Entrepreneurship', 'languages.jpg', 'A Quick Guide to Starting a Business', 'Taking the first step towards a new business venture can be daunting. Knowing what to do at the start makes your business venture more likely to succeed. All aspiring entrepreneurs are welcome to enroll, regardless of their backgrounds or experience levels.', 'IDEATION', 'The idea of starting a business is usually accompanied by an idea of what you\'d like to sell, or at least the market you\'d like to enter. It is crucial to clearly understand your choice\'s rationale before you make it...', 'BUSINESS MANAGEMENT', 'There are a few questions you should ask about your business idea. For example, what is your purpose? What market are you targeting? What are your long-term goals? Your startup costs will be financed in what way? An effective business plan will answer these questions...', 'SUSTAINABILITY', 'As an entrepreneur, your task does not end with your launch and first sales. Keeping your business afloat and profitable requires continuous growth. Your business is going to require time and effort, but you\'ll be rewarded according to the amount of effort you put forth...', '2021-06-22 05:58:28', '2021-07-15 08:29:02', 5, 'visible'),
+(3, 'E-Lancing', '1624440711-1-E-Lancing.jpg', 'Find and service clients online', 'Making money and finding jobs is easier than ever with e-lancing. As the name implies, e-lancing involves working as a freelancer online. E-lancers typically find and service clients online.\r\n\r\n\r\nUnlike freelancers in the past, you are no longer required to advertise only in your town or from your personal network. If you know what you are doing, you can reach hundreds, thousands, and even hundreds of thousands of potential customers with an advertising budget of just a few hundred dollars.', 'THE ART OF FREELANCING', 'Here, you will learn methods for finding work online using your existing skills. In addition, it will help you approach prospective customers in a disciplined and effective way.', 'COPYWRITING & TRANCRIBING', 'You will earn $10 to $35 per hour as a transcriptionist or copywriter if you learn transcription and copywriting skills and find work with 100s of providers worldwide.', 'DATA ANALYSIS', 'The information in this topic will help you succeed as an analyst as you learn how to manipulate data types like text, times and dates, as well as create logic functions and conditional aggregations.', '2021-06-23 07:31:51', '2021-07-01 05:33:40', 6, 'hidden'),
+(4, 'Web Development', '1625067116-1-Web Development.jpg', 'A Quick Guide to Starting a Business', 'Taking the first step towards a new business venture can be daunting. Knowing what to do at the start makes your business venture more likely to succeed. All aspiring entrepreneurs are welcome to enroll, regardless of your backgrounds or experience levels.', 'IDEATION', 'The idea of starting a business is usually accompanied by an idea of what you\'d like to sell, or at least the market you\'d like to enter. It is crucial to clearly understand your choice\'s rationale before you make it...', 'BUSINESS MANAGEMENT', 'There are a few questions you should ask about your business idea. For example, what is your purpose? What market are you targeting? What are your long-term goals? Your startup costs will be financed in what way? An effective business plan will answer these questions...', 'SUSTAINABILITY', 'As an entrepreneur, your task does not end with your launch and first sales. Keeping your business afloat and profitable requires continuous growth. Your business is going to require time and effort, but you\'ll be rewarded according to the amount of effort you put forth...', '2021-06-30 13:31:56', '2021-07-01 05:42:07', 17, 'hidden');
 
 -- --------------------------------------------------------
 
@@ -77,10 +131,9 @@ CREATE TABLE `course_materials` (
 --
 
 INSERT INTO `course_materials` (`id`, `course_id`, `topic_id`, `subtopic_id`, `lesson_name`, `lesson_description`, `lecture_video`, `visibility_state`, `created_at`, `updated_at`) VALUES
-(5, 1, 4, 4, 'Recognizing opportunity and generating ideas', 'The idea of starting a business is usually accompanied by an idea of what you\'d like to sell, or at least the market you\'d like to enter.', '-1624885676-1.mp4', 1, '2021-06-28 11:07:56', '2021-06-28 11:07:56'),
-(6, 1, 4, 4, 'Generating a Business ideas', 'The idea of starting a business is usually accompanied by an idea of what you\'d like to sell, or at least the market you\'d like to enter. It is crucial to clearly understand your choice\'s rationale before you make it...', '-1624885859-1.mp4', 1, '2021-06-28 11:10:59', '2021-06-28 11:10:59'),
-(7, 3, 16, 40, 'What steps can I take to break into the field?', 'Here, you will learn methods for finding work online using your existing skills. In addition, it will help you approach prospective customers in a disciplined and effective way.', '-1624886214-3.mp4', 1, '2021-06-28 11:16:54', '2021-06-28 11:16:54'),
-(8, 1, 4, 4, 'Creating a Business Model', 'In this lecture, you will be introduced on how to can create a business model for your startup.', '-1625066658-1.mp4', 1, '2021-06-30 13:24:18', '2021-06-30 13:24:18');
+(10, 1, 4, 4, 'Technology and Entrepreneurship Overview', 'Introduction to Entrepreneurship will introduce future business owners to the concepts and \r\nprinciples of entrepreneurship.  The course will introduce the role entrepreneurs play in the \r\nlocal business environment and the impact of entrepreneurship on the national economy.  \r\nThis course will explore many of the concepts that future entrepreneurs must master \r\nbefore they start their business.  It is a course that mixes theory with practice.  Learners will \r\nbe challenged to apply the principles, concepts and framework to real world situations.', '-1625470674-1.webm', 1, '2021-07-15 10:39:39', '2021-07-15 10:39:39'),
+(11, 1, 4, 5, 'Silicon Valley', 'To capture the output from the reflective questions and activities you are asked to keep a \r\npersonal journal.  At the end of the course the personal journal will be submitted to your \r\ninstructor for feedback and grading.', '-1626353187-1.mp4', 1, '2021-07-15 10:46:27', '2021-07-15 10:46:27'),
+(12, 1, 5, 7, 'Nine Key Frameworks for Entrepreneurship', 'Welcome to the first unit in this course.  The idea of entrepreneurship may sound exciting, \r\nbut it may not necessarily be for everyone.  There are number of questions you need to ask \r\nyourself as an entrepreneur to determine whether or not you should go ahead with your \r\ngreat business idea.  In this unit, we will discuss the nature of entrepreneurship, \r\ndifferentiate between entrepreneurship and entrepreneurs, look at the role that \r\nentrepreneurship plays in society and also discuss the characteristics of an \r\nentrepreneur.', '-1626353249-1.mp4', 1, '2021-07-15 10:47:29', '2021-07-15 10:47:29');
 
 -- --------------------------------------------------------
 
@@ -108,7 +161,10 @@ INSERT INTO `discussion_comments` (`id`, `course_id`, `topic_id`, `user_id`, `di
 (2, 3, 16, 5, 1, 'Tell us you are here by commenting to this message', '2021-06-29 07:29:40', '2021-06-29 07:29:40'),
 (3, 3, 16, 7, 1, 'Hello everyone, I am Billy Paul Byamasu, I am joining the course from Malawi. I really like working online because of the field that I am in.', '2021-06-29 08:06:54', '2021-06-29 08:06:54'),
 (4, 3, 16, 5, 1, 'Nice to hear from you, Paul', '2021-06-30 13:26:20', '2021-06-30 13:26:20'),
-(5, 3, 16, 7, 1, 'Thank you', '2021-06-30 13:28:47', '2021-06-30 13:28:47');
+(5, 3, 16, 7, 1, 'Thank you', '2021-06-30 13:28:47', '2021-06-30 13:28:47'),
+(6, 3, 16, 7, 1, 'Hey guys, it is so quiet in this room. What\'s up?', '2021-07-05 06:22:05', '2021-07-05 06:22:05'),
+(7, 1, 4, 7, 2, 'Hello everyone, I am Billy Paul Byamasu, I am from Dzaleka Refugee Camp Malawi. I love programming and I am very much passioned about bringing new innovation theough coding. It is very nice to be part of this course.', '2021-07-09 13:44:30', '2021-07-09 13:44:30'),
+(8, 1, 4, 5, 2, 'It\'s nice to hear from you Paul, I hope we will have a very nice moment together. And I hope you will be enjoying this course. I am sure by the end of this course you will at least have some ideas and be able to have your own startup up and running.', '2021-07-09 13:46:55', '2021-07-09 13:46:55');
 
 -- --------------------------------------------------------
 
@@ -131,7 +187,8 @@ CREATE TABLE `discussion_forums` (
 --
 
 INSERT INTO `discussion_forums` (`id`, `course_id`, `topic_id`, `teacher_id`, `discussion_description`, `created_at`, `updated_at`) VALUES
-(1, 3, 16, 5, 'Good morning guys, I hope you are all doing great! As today is our first time to meet, I would like everyone to introduce himself or herself so that we should know each other.\r\nI am Dr. Patrick Paul, I am a professor of Computer Science at the University of Livingstonia, I am going to take you up through this course of e-lancing where by we will be exploring different technique to use for you get hired by someone based on your professional skills and experience. I would like to hear if you are here.\r\nThank you so much, see you in the course.', '2021-06-29 05:14:29', '2021-06-29 05:14:29');
+(1, 3, 16, 5, 'Good morning guys, I hope you are all doing great! As today is our first time to meet, I would like everyone to introduce himself or herself so that we should know each other.\r\nI am Dr. Patrick Paul, I am a professor of Computer Science at the University of Livingstonia, I am going to take you up through this course of e-lancing where by we will be exploring different technique to use for you get hired by someone based on your professional skills and experience. I would like to hear if you are here.\r\nThank you so much, see you in the course.', '2021-06-29 05:14:29', '2021-06-29 05:14:29'),
+(2, 1, 4, 5, 'Welcome to  Entrepreneurship course, before we start the course I would like to ask everyone to introduce himself/herself so that we should get to know each other. \r\nI am going start, my name is Francoise Luhembwe I am professor of Computer Science at Mzuzu University, I also hold an MBA from Pennsylvania University, USA. I will be your instructor in this Entrepreneurship course which is based on ICT Entrepreneurship. \r\nThank you so much, I hope to know each one of you soon.', '2021-07-09 13:42:05', '2021-07-09 13:42:05');
 
 -- --------------------------------------------------------
 
@@ -180,6 +237,31 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `learning_progress`
+--
+
+CREATE TABLE `learning_progress` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `week_id` int(11) NOT NULL,
+  `video_played` int(11) NOT NULL,
+  `week_progress` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `learning_progress`
+--
+
+INSERT INTO `learning_progress` (`id`, `student_id`, `course_id`, `week_id`, `video_played`, `week_progress`, `created_at`, `updated_at`) VALUES
+(53, 7, 1, 4, 10, 33, '2021-07-16 06:47:48', '2021-07-16 06:47:48'),
+(54, 7, 1, 4, 11, 33, '2021-07-16 11:03:20', '2021-07-16 11:03:20');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -207,7 +289,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (31, '2021_06_28_102247_create_course_materials_table', 7),
 (32, '2021_06_28_113555_create_quizes_table', 7),
 (33, '2021_06_29_061548_create_discussion_comments_table', 8),
-(34, '2021_06_29_061620_create_discussion_forums_table', 8);
+(34, '2021_06_29_061620_create_discussion_forums_table', 8),
+(38, '2021_07_09_081114_create_learning_progress_table', 9),
+(51, '2021_07_13_133645_create_assessment_books_table', 10),
+(52, '2021_07_13_134018_create_result_books_table', 10),
+(53, '2021_07_13_134104_create_additional_course_materials_table', 10),
+(54, '2021_07_15_080706_add_status_to_courses', 11),
+(55, '2021_07_16_130925_change_question_id_to_unique', 12);
 
 -- --------------------------------------------------------
 
@@ -326,6 +414,32 @@ CREATE TABLE `quizes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `result_books`
+--
+
+CREATE TABLE `result_books` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `topic_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `marks` double NOT NULL,
+  `selected_answer` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `result_books`
+--
+
+INSERT INTO `result_books` (`id`, `course_id`, `topic_id`, `student_id`, `question_id`, `marks`, `selected_answer`, `created_at`, `updated_at`) VALUES
+(1, 1, 4, 7, 2, 50, 'Talking to Professors', '2021-07-16 11:06:46', '2021-07-16 11:06:46'),
+(2, 1, 4, 7, 1, 50, 'Sleeping', '2021-07-16 11:06:46', '2021-07-16 11:06:46');
 
 -- --------------------------------------------------------
 
@@ -510,10 +624,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `account_type`, `profile`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Byamasu Patrick', 'patrick@gmail.com', '+265996668149', 'administrator', 'profile', NULL, '$2y$10$FNcYmDi5wSmSdzw1zLCl8u7.gq.B0zcE9A8q72J8U4Q/6poaqizqK', 'PnSLhsvzu9z5WstIX527wuwGfyuJufH7WPLnABYERIBjmGz6aoEggwoGPyMy', '2021-06-10 10:23:39', '2021-06-10 10:23:39'),
+(1, 'Byamasu Patrick', 'patrick@gmail.com', '+265996668149', 'administrator', 'profile', NULL, '$2y$10$FNcYmDi5wSmSdzw1zLCl8u7.gq.B0zcE9A8q72J8U4Q/6poaqizqK', 'rliAJxAbHWH3ijZh2jCEPLvMkZYrxrqKyw6g343C0EReiWQNUX0oEZUpkEZr', '2021-06-10 10:23:39', '2021-06-10 10:23:39'),
 (5, 'Francoise Luhembwe Eveline', 'francoise@gmail.com', '+265996668148', 'teacher', '1624433823-5-teacher.jpg', NULL, '$2y$10$FNcYmDi5wSmSdzw1zLCl8u7.gq.B0zcE9A8q72J8U4Q/6poaqizqK', NULL, '2021-06-17 12:19:23', '2021-06-23 05:37:03'),
-(6, 'Amani Yao', 'amani@gmail.com', '+265996668144', 'teacher', 'profile', NULL, '$2y$10$BROPXGP8v95uEftxiwyinOOv9NoRLRZbAYe3aPU2CaZTR5zqhQO5a', NULL, '2021-06-17 12:28:00', '2021-06-17 12:28:00'),
-(7, 'Billy Paul Byamasu', 'billypaul@gmail.com', '+265996668139', 'student', 'profile', NULL, '$2y$10$FNcYmDi5wSmSdzw1zLCl8u7.gq.B0zcE9A8q72J8U4Q/6poaqizqK', '8ZwpevQG1RRtwktOL6sVwubZ15AZqhP44HBBVQpnGHv3KZYAhvHy7BIlTOaq', '2021-06-22 13:10:04', '2021-06-23 04:18:35'),
+(6, 'Amani Yao', 'amani@gmail.com', '+265996668144', 'teacher', 'profile', NULL, '$2y$10$FNcYmDi5wSmSdzw1zLCl8u7.gq.B0zcE9A8q72J8U4Q/6poaqizqK', NULL, '2021-06-17 12:28:00', '2021-06-17 12:28:00'),
+(7, 'Billy Paul Byamasu', 'billypaul@gmail.com', '+265996668139', 'student', 'profile', NULL, '$2y$10$FNcYmDi5wSmSdzw1zLCl8u7.gq.B0zcE9A8q72J8U4Q/6poaqizqK', 'qsxu5qvOL78dPGV3EQBrqJyBt9MrDVcVmHE7E2jANsnRgMF2mMyFTfZP3SGe', '2021-06-22 13:10:04', '2021-06-23 04:18:35'),
 (9, 'Deborah Ndakilutimana', 'deborah@gmail.com', '+265996668147', 'student', '1624437779-9-student.jpg', NULL, '$2y$10$FNcYmDi5wSmSdzw1zLCl8u7.gq.B0zcE9A8q72J8U4Q/6poaqizqK', NULL, '2021-06-23 06:40:56', '2021-06-23 06:42:59'),
 (10, 'Amani Yao Tresor', 'amaniyao@gmail.com', '+265996568139', 'teacher', 'profile', NULL, '$2y$10$M.XKFLXQQTXM7kRphvBd4uKxwX5LNd/N/nibf7wYE/pVXLSa68F86', NULL, '2021-06-30 12:31:12', '2021-06-30 12:31:12'),
 (13, 'Yemulanzi Levi', 'levi@gmail.com', '+265996608130', 'teacher', 'profile', NULL, '$2y$10$YrIvAYYU5MnfQPIcZAaZ8OlPrY1AMlXX0PLEXoetwP9v1OXrUQiu6', NULL, '2021-06-30 12:45:35', '2021-06-30 12:45:35'),
@@ -525,6 +639,18 @@ INSERT INTO `users` (`id`, `name`, `email`, `phone`, `account_type`, `profile`, 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `additional_course_materials`
+--
+ALTER TABLE `additional_course_materials`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `assessment_books`
+--
+ALTER TABLE `assessment_books`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `courses`
@@ -565,6 +691,12 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
+-- Indexes for table `learning_progress`
+--
+ALTER TABLE `learning_progress`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -601,6 +733,12 @@ ALTER TABLE `permission_user`
 -- Indexes for table `quizes`
 --
 ALTER TABLE `quizes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `result_books`
+--
+ALTER TABLE `result_books`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -650,6 +788,18 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `additional_course_materials`
+--
+ALTER TABLE `additional_course_materials`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `assessment_books`
+--
+ALTER TABLE `assessment_books`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
@@ -659,19 +809,19 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `course_materials`
 --
 ALTER TABLE `course_materials`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `discussion_comments`
 --
 ALTER TABLE `discussion_comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `discussion_forums`
 --
 ALTER TABLE `discussion_forums`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `enrolled_courses`
@@ -686,10 +836,16 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `learning_progress`
+--
+ALTER TABLE `learning_progress`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -702,6 +858,12 @@ ALTER TABLE `permissions`
 --
 ALTER TABLE `quizes`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `result_books`
+--
+ALTER TABLE `result_books`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `roles`
