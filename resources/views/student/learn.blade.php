@@ -50,7 +50,7 @@
                 
             </div>
             <div class="tab-pane fade show active" id="nav-videos" role="tabpanel" aria-labelledby="nav-videos-tab">
-                <div  style="margin-top: 10px;"><span><small style="font-size: 16px;"> {{ ($courses->topics[0]->topic_name) }}  <span class="fa fa-chevron-right"  style="margin-left: 10px;" aria-hidden="true"></span> <span id="lecture_title">{{ $videos_lecture[0]->lesson_name }}</span></small></span> <span><a href="#description" style="float:right; text-decoration: none;color: rgb(109, 130, 74);">See the description</a></span></div>                            
+                <div  style="margin-top: 10px;"><span><small style="font-size: 16px;"> {{ ($courses->topics[0]->topic_name) }}  <span class="fa fa-chevron-right"  style="margin-left: 10px;" aria-hidden="true"></span> <span id="lecture_title">{{ $videos_lecture[0]->lesson_name }}</span></small></span> <span><a href="#description" class="description" style="float:right; text-decoration: none;">See the description</a></span></div>                            
                 <div class="embed-responsive embed-responsive-4by3" id="video_to_play" style="border: 1px solid rgb(109, 130, 74);margin-top: 20px; background: #ccc; max-width: 93%; height: 410px;">
                     @for($index = 0; $index < count($videos_lecture); $index++)
                         @if($videos_lecture[$index]->played_state == FALSE)

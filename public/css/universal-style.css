@@ -28,3 +28,15 @@
    color: rgb(109, 130, 74);
    font-weight: bold;
  }
+ .description{
+    padding: 2px;
+    border: 1px solid rgb(109, 130, 74);
+    background-color: rgb(255, 255, 255);
+    color: rgb(109, 130, 74);
+  
+ }
+ .description:hover{
+    border: 1px solid rgb(109, 130, 74);
+    color: rgb(255, 255, 255);
+    background-color: rgb(109, 130, 74);
+ }
