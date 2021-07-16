@@ -252,4 +252,12 @@ class EnrolledCoursesController extends Controller
             //throw $th;
         }
     }
+    private function getCourseLectureVideos(){
+        try {
+            //Get all the video lectures
+        } catch (\Throwable $th) {
+            //throw $th;
+            return NULL;
+        }
+    }
 }

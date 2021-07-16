@@ -5,10 +5,15 @@ let topicId = 0;
 window.addEventListener("load", function(){
     $("#video_to_play video").bind("ended", function(){
         console.log(courses_g);
+       
         //Register the progress and load next video not continue learning
         let iterator = indexVideo;         
         if (((lecture_video_g[iterator + 1].topic_id) == (topicId + 1))) {
             //Then load prompt a message that you reached at the end of the week, you need to take your quiz
+            let url = $("#confirm").attr("href");
+            url = url +"&week_id="+ topicId;
+            url = $("#confirm").attr("href", url);
+            //alert(url);
             sendProgressVideo(lecture_video_g[indexVideo].course_id, lecture_video_g[indexVideo].id, lecture_video_g[indexVideo].topic_id);
             $('#courseSetting').modal('toggle');
             $('#courseSetting').modal('show');
@@ -20,8 +25,8 @@ window.addEventListener("load", function(){
         }
         
     });
+    
 });
-//
 function getVideos(courses, lecture_video, currentIndexPlayed, weekInProgress){
     try {        
         if (courses_g == 0 && lecture_video_g == 0) {            

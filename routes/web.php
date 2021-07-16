@@ -71,3 +71,5 @@ Route::post('/student/account/edit', [App\Http\Controllers\StudentController::cl
 Route::post('/student/profile/edit', [App\Http\Controllers\StudentController::class, 'change_profile'])->name('student');
 Route::post('/student/courses/progress', [App\Http\Controllers\LearningProgressController::class, 'new_progress'])->name('student');
 Route::get('/assessment/{id}/take', [App\Http\Controllers\QuizesController::class, 'index'])->name("student");
+Route::get('/assessment/{course_id}/{week_id}/start', [App\Http\Controllers\QuizesController::class, 'start'])->name("student");
+Route::post('/assessment/{course_id}/{week_id}/result', [App\Http\Controllers\QuizesController::class, 'result'])->name("student");

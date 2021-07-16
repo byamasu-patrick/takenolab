@@ -7,7 +7,6 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/student"><i class="fas fa-tachometer-alt" style="font-size: 22px; margin: 5px;"></i>
                       <span>Dashboard</span></a>
                             <a class="nav-link" href="/student/explore"><i class="fas fa-list" style="font-size: 20px;margin: 5px;"></i><span>Explore Courses</span></a>
-                            <a class="nav-link" href="/student/courses-in-progress"><i class="fas fa-info-circle" style="font-size: 20px;margin: 5px;"></i><span>Courses in Progress</span></a>
                             <a class="nav-link" href="/student/account/ {{ Auth::user()->id }}"><i class="fas fa-cogs" style="font-size: 20px;margin: 5px;"></i><span>Account Settings</span></a>
                             <a class="nav-link" href="/student/terms-and-conditions"><i class="fas fa-users-cog" style="font-size: 20px;margin: 5px;"></i><span> Terms and Cond</span></a>
                 </ul>
